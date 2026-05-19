@@ -1,0 +1,5 @@
+[build]
+  command = "npm run build"
+ 
+[[plugins]]
+  package = "@Netlify/plugin-nextjs"
