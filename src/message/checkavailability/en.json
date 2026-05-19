@@ -1,0 +1,6 @@
+{
+  "newavailability": "New availability request received",
+  "guest": "A guest is requesting room availability. Please respond promptly — guests are notified every 15 seconds until you act.",
+  "acceptRequest": "Check Availability Request",
+  "other": "Other pending requests"
+}
