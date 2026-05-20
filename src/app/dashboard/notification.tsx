@@ -13,7 +13,10 @@ const Notification = () => {
           <div className="w-2.5 h-2.5 rounded-full bg-[#d4a87a]"></div>
           <h2 className="text-[#5c462b] font-medium text-base">{t("newavailability")}</h2>
         </div>
-        
+      <div className='flex items-center gap-2'>
+           <p>Request Time</p>
+      <p>10:00 AM</p>
+   </div>
         <p className="text-[#7c6448] text-sm mb-4">
           A guest is requesting room availability. Please respond promptly — guests are notified every 15 seconds until you act.
         </p>

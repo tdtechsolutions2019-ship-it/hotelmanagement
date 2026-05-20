@@ -30,7 +30,7 @@ export const fetchCountriesIfNeeded = async (dispatch: any, getState: any) => {
       dispatch(setCountry(formattedData));
     }
   } catch (error) {
-    console.log(error);
+   
   }
 };
 
@@ -44,21 +44,19 @@ export const fetchStatesIfNeeded = async (dispatch: any, getState: any) => {
         "Content-Type": "application/json",
       },
     })
-    console.log("state Resss",res)
+
     if (res.status === 200) {
 
       dispatch(setGroupedState(res.data));
 
     }
   } catch (error) {
-    console.log("error", error)
   }
 }
 
 
 export const fetchCenterIfNeeded = async (dispatch: any, getState: any) => {
   const { centerInfo } = getState();
-  console.log("center111111111", centerInfo)
   if (centerInfo?.list?.length > 0) return;
   try {
 
@@ -67,7 +65,7 @@ export const fetchCenterIfNeeded = async (dispatch: any, getState: any) => {
         "Content-Type": "application/json",
       },
     })
-    console.log("Center Info", res)
+  
     if (res.status === 200) {
       const formattedData = res.data.map((item: any) => ({
         ...item,
@@ -77,7 +75,6 @@ export const fetchCenterIfNeeded = async (dispatch: any, getState: any) => {
       dispatch(setCenterInfo(formattedData));
     }
   } catch (error) {
-    console.log("error", error)
   }
   finally {
 
@@ -95,7 +92,6 @@ export const fetchCenterIfNeeded = async (dispatch: any, getState: any) => {
                     "Content-Type": "application/json",
                 },
             })
-            console.log("res", res)
             if (res.status === 200) {
 
                 const formattedData = res.data.map((item: any) => ({
@@ -105,14 +101,13 @@ export const fetchCenterIfNeeded = async (dispatch: any, getState: any) => {
                  dispatch(setRole(formattedData));
             }
         } catch (error) {
-            console.log("error", error)
         }
        
     }
 
 export const fetchSubjectIfNeeded = async (dispatch: any, getState: any) => {
   const { subject } = getState();
-  console.log("subject in fatchapi", subject)
+
   if (subject?.list?.length > 0) return; 
 
   try {
@@ -131,7 +126,6 @@ export const fetchSubjectIfNeeded = async (dispatch: any, getState: any) => {
       dispatch(setSubject(formattedData));
     }
   } catch (error) {
-    console.log(error);
   }
 };
 
@@ -147,7 +141,7 @@ export const fetchCourseIfNeeded = async (dispatch: any, getState: any) => {
         "Content-Type": "application/json",
       },
     });
-    console.log("res sub", res);
+  
     if (res.status === 200) {
       const formattedData = res.data.map((item: any) => ({
         ...item,
@@ -157,7 +151,6 @@ export const fetchCourseIfNeeded = async (dispatch: any, getState: any) => {
       dispatch(setCourse(formattedData));
     }
   } catch (error) {
-    console.log(error);
   }
 };
 
@@ -172,7 +165,7 @@ export const fetchStudentIfNeeded = async (dispatch: any, getState: any) => {
         "Content-Type": "application/json",
       },
     });
-    console.log("res sub", res);
+  
     if (res.status === 200) {
       const formattedData = res.data.map((item: any) => ({
         ...item,
@@ -182,6 +175,5 @@ export const fetchStudentIfNeeded = async (dispatch: any, getState: any) => {
       dispatch(setStudent(formattedData));
     }
   } catch (error) {
-    console.log(error);
   }
 };

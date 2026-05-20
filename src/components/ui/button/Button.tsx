@@ -40,7 +40,7 @@ const Button: React.FC<ButtonProps> = ({
 
    
   };
-console.log("className",className)
+
   return (
     <button
       className={`

@@ -21,8 +21,20 @@ import Loader from "@/helper/loader";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { useSelector } from "react-redux";
 
-export default function DataTable({ data, columns, isstudent, editPath, onDelete, loading, examschedule,setRowSelection, examscheduleList, downloadStudents, modulename }: any) {
-  console.log("examschedule", examschedule)
+export default function DataTable({
+  data = [],
+  columns = [],
+  isstudent,
+  editPath,
+  onDelete,
+  loading,
+  examschedule,
+  setRowSelection,
+  examscheduleList,
+  downloadStudents,
+  modulename,
+}: any) {
+
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [pagination, setPagination] = useState({
@@ -30,13 +42,13 @@ export default function DataTable({ data, columns, isstudent, editPath, onDelete
     pageSize: 10,
   });
   // const filename = location.pathname.split("/")[2];
-  // console.log("filename",filename)
+ 
   const userData = useSelector((state: any) => state.login.user);
   const pathname = usePathname();
 
   const filename = pathname.split("/")[2];
 
-  console.log("filename", filename);
+
 
   // CSV
   const csvConfig = mkConfig({
@@ -54,13 +66,13 @@ export default function DataTable({ data, columns, isstudent, editPath, onDelete
   // Excel
   const exportExcel = () => {
     // ✅ Headers
-    const headers = columns.map((col: any) => col.header);
+   const headers = (columns || []).map((col: any) => col.header);
 
     // ✅ Rows (with Cell support)
     const rows = data.map((row: any) => {
       const obj: any = {};
 
-      columns.forEach((col: any) => {
+     (columns || []).forEach((col: any) => {
         let value = "";
 
         if (col.Cell) {
@@ -97,11 +109,11 @@ export default function DataTable({ data, columns, isstudent, editPath, onDelete
   const exportPDF = () => {
     const doc = new jsPDF();
 
-    const headers = columns.map((col: any) => col.header);
+    const headers = (columns || []).map((col: any) => col.header);
 
     const body = data.map((row: any) =>
-      columns.map((col: any) => {
-        console.log("row", row)
+      (columns || []).map((col: any) => {
+   
         if (col.Cell) {
           return typeof col.Cell === "function"
             ? col.Cell({
@@ -122,7 +134,7 @@ export default function DataTable({ data, columns, isstudent, editPath, onDelete
     // ✅ dynamic name
     doc.save(`${filename}_${Date.now()}.pdf`);
   };
-  console.log("studentdata", isstudent)
+
   const srNoColumn = {
     header: "Sr. No.",
     size: 60,
@@ -132,7 +144,10 @@ export default function DataTable({ data, columns, isstudent, editPath, onDelete
       return pageIndex * pageSize + row.index % pageSize + 1;
     },
   };
-  const tableColumns = [srNoColumn, ...columns];
+ const tableColumns = [
+  srNoColumn,
+  ...(Array.isArray(columns) ? columns : []),
+];
   
   return (
 
@@ -188,7 +203,6 @@ export default function DataTable({ data, columns, isstudent, editPath, onDelete
                       const selectedRows = table.getSelectedRowModel().rows;
                       const selectedData = selectedRows.map(row => row.original);
                       setRowSelection(selectedData);
-                      console.log(selectedData);
                     }}
                   >
                     <AddOutlinedIcon fontSize="small" /> Select

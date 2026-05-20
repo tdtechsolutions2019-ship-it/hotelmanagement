@@ -13,11 +13,11 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 interface ComponentCardProps {
   title: string;
   children: React.ReactNode;
-  className?: string; // Additional custom classes for styling
-  desc?: string; // Description text
+  className?: string; 
+  desc?: string; 
   path?: string;
-  modalopen: boolean;
-  setmodalopen: any;
+  modalopen?: boolean; // Added ?
+  setmodalopen?: any; // Added ?
   importbtn?: boolean;
   quebtn?: boolean;
   quepath?: string;
@@ -26,7 +26,7 @@ interface ComponentCardProps {
   modulename?: string
   showfilter?: boolean,
   setfilter?: any,
-  filterComponent: React.ComponentType<any>;
+  filterComponent?: React.ComponentType<any>; // Added ?
   filterbtn?: boolean
   filterProps?: any;
 }
@@ -52,9 +52,9 @@ const ComponentCard: React.FC<ComponentCardProps> = ({
   filterComponent: FilterComponent
 }) => {
   const userData = useSelector((state: any) => state.login.user);
-  console.log("userData", userData)
+ 
   const router = useRouter();
-  console.log("modulename", filterbtn)
+
   return (
     <div
       className={`rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03] ${className}`}

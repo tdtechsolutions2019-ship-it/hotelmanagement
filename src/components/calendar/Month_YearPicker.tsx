@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useRef, useState } from "react";
 
 
@@ -8,10 +9,10 @@ const months = [
 ];
 
 export default function MonthYearPicker({ value, onChange }) {
-    console.log('value', value)
+   
     const [open, setOpen] = useState(false);
     const [year, setYear] = useState(new Date().getFullYear());
-    const ref = useRef();
+    const ref = useRef<HTMLDivElement>(null);
 
     // ✅ Handle value safely (string only: yyyy-MM)
     const selectedMonth =

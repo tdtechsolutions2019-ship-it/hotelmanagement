@@ -1,12 +1,17 @@
 "use client";
-import Button from '@/components/ui/button/Button';
-import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import Button from "@/components/ui/button/Button"; // Adjust path if needed
+import BookingDenyedPopup from "./popup"; // Import the popup component
 
 const AcceptRequest = () => {
-  const router =useRouter();
+  const router = useRouter();
+  
+  // State to control popup visibility
+  const [showDenyPopup, setShowDenyPopup] = useState(false);
+
   return (
-    <div className=" p-8 font-sans bg-white text-gray-900">
+    <div className="p-8 font-sans bg-white text-gray-900 relative">
       {/* User Header Profile */}
       <div className="flex items-center gap-4 mb-10">
         <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-800 flex items-center justify-center font-medium text-lg shrink-0">
@@ -14,13 +19,14 @@ const AcceptRequest = () => {
         </div>
         <div>
           <h2 className="font-semibold text-base">Anil Mehta</h2>
-          <p className="text-gray-600 text-sm mt-0.5">+91 98765 43210 · 2 Guests</p>
+          <p className="text-gray-600 text-sm mt-0.5">
+            +91 98765 43210 · 2 Guests
+          </p>
         </div>
       </div>
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-10">
-        
         {/* Left Column: Request Details */}
         <div>
           <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-6">
@@ -54,6 +60,10 @@ const AcceptRequest = () => {
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Airport shuttle</span>
               <span className="font-medium text-gray-900">Yes · ₹600</span>
+            </div>
+             <div className="flex justify-between items-center">
+              <span className="text-gray-600">Request Time</span>
+              <span className="font-medium text-gray-900">10:00 AM</span>
             </div>
           </div>
         </div>
@@ -94,7 +104,7 @@ const AcceptRequest = () => {
                 Occupied
               </span>
             </div>
-            
+
             <p className="text-xs text-gray-500 mt-4">
               Only Standard grade shown — matching request grade.
             </p>
@@ -104,19 +114,27 @@ const AcceptRequest = () => {
 
       {/* Action Buttons */}
       <div className="flex items-center gap-4 mt-12 pt-4">
-        <Button  variant='primary' onClick={() => {
-        
-          router.push('/allocation');
-        }} className="">
+        <Button
+          variant="primary"
+          onClick={() => {
+            router.push("/allocation");
+          }}
+        >
           Accept request
         </Button>
-        <Button variant='outline' onClick={() => {
-          router.push("/denyRequest")
-        }} className=' ring-red-600 bg-red-400 text-red-600 '>
+        <Button
+          variant="outline"
+          onClick={() => setShowDenyPopup(true)} // Open the popup here
+          className="ring-red-600 bg-red-400 text-red-600"
+        >
           Deny request
         </Button>
-       
       </div>
+
+      {/* Render the Popup conditionally */}
+      {showDenyPopup && (
+        <BookingDenyedPopup onClose={() => setShowDenyPopup(false)} />
+      )}
     </div>
   );
 };

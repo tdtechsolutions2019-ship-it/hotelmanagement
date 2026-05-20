@@ -34,7 +34,7 @@ export default function UserMetaCard() {
       initialValues,
       // validationSchema: studentPageSchema,
       onSubmit: async (value, action) => {
-        console.log("form values student Data", value);
+   
 
         // try {
         //   // setLoading(true);
@@ -52,7 +52,7 @@ export default function UserMetaCard() {
         //   }
         // } catch (error) {
         //   toast.error("Failed to add Photo");
-        //   console.log("API Error", error);
+    
         // }
         // finally {
         //   // setLoading(false);
@@ -65,7 +65,7 @@ export default function UserMetaCard() {
       formData.append("user_img", file);
 
       const res = await updateData(`${Api.addUserPhoto}/${id}`, formData);
-      console.log("ress photo", res);
+ 
 
       if (res.status === 200) {
         toast.success("Photo updated successfully");
@@ -78,7 +78,7 @@ export default function UserMetaCard() {
       }
     } catch (error) {
       toast.error("Upload failed");
-      console.log(error);
+
     }
   };
 
@@ -91,15 +91,14 @@ export default function UserMetaCard() {
           "Content-Type": "application/json",
         },
       });
-      console.log("res", res)
+  
       const data = res.data || {};
       
-      console.log("update data", data)
-      console.log("get photo", res)
+  
      
       setPreviewImage(data.user_img?.url || null);
     } catch (error) {
-      console.log("Fetch Error", error);
+    
     }
     finally {
       // setLoading(false);
@@ -108,7 +107,7 @@ export default function UserMetaCard() {
   useEffect(() => {
     getUserPhoto();
   }, []);
-  console.log("previewImage", previewImage)
+
   return (
     <>
       <div className="p-5 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
